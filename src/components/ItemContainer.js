@@ -1,11 +1,13 @@
 import { connect } from 'react-redux';
+import { buyCake, buyIceCream } from '../redux';
 
-function ItemContainer({ item, numOfItem }) {
+function ItemContainer({ item, numOfItem, buyItem }) {
   return (
     <div>
       <h2>
         &gt;&gt;Number of {item} - {numOfItem}
       </h2>
+      <button onClick={buyItem}>Buy {item}</button>
     </div>
   );
 }
@@ -23,4 +25,16 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps)(ItemContainer);
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const dispatchFunc =
+    ownProps.item === 'cake'
+      ? () => dispatch(buyCake())
+      : ownProps.item === 'ice cream'
+      ? () => dispatch(buyIceCream())
+      : console.log('error dispatch, invalid item name');
+  return {
+    buyItem: dispatchFunc,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ItemContainer);
