@@ -13,7 +13,7 @@ function CakeContainer({ numOfCakes, buyCake }) {
 // step 1 - add numOfCakes property (referring to state.numOfCakes) to props
 const mapStateToProps = (state) => {
   return {
-    numOfCakes: state.numOfCakes,
+    numOfCakes: state.cake.numOfCakes,
   };
 };
 
